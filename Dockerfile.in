@@ -7,7 +7,7 @@ MAINTAINER github/ojgarciab
 RUN sed -i 's/\/archive\.ubuntu\.com/\/es.archive.ubuntu.com/g' /etc/apt/sources.list
 
 # Install wget, needed for download repository keys and "add-apt-repository" command
-RUN apt-get update && apt-get install -y wget python-software-properties
+RUN apt-get update && apt-get install -y wget software-properties-common
 
 # Add Gazebo repositories
 RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -cs) main" \
