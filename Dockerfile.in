@@ -4,10 +4,10 @@ MAINTAINER github/ojgarciab
 # Based on http://gernotklingler.com/blog/docker-replaced-virtual-machines-chroots/
 
 # Change repositories to spanish (optional)
-#RUN sed -i 's/\/archive\.ubuntu\.com/\/es.archive.ubuntu.com/g' /etc/apt/sources.list
+RUN sed -i 's/\/archive\.ubuntu\.com/\/es.archive.ubuntu.com/g' /etc/apt/sources.list
 
-# Install wget, needed for download repository keys
-RUN apt-get update && apt-get install -y wget
+# Install wget, needed for download repository keys and "add-apt-repository" command
+RUN apt-get update && apt-get install -y wget python-software-properties
 
 # Add Gazebo repositories
 RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -cs) main" \
