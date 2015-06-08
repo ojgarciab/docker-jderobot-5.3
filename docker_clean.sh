@@ -3,13 +3,13 @@
 while read -r image
 do
     echo "Removing partial image $image"
-    CONTAINER=$(docker ps | grep "[^a-f0-9]caed7f3a228b" | cut -d " " -f 1)
+    CONTAINER=$(docker ps | grep "[^a-f0-9]$image" | cut -d " " -f 1)
     if [ -n "$CONTAINER" ]
     then
         echo " > Stopping running container $CONTAINER"
         docker stop "$CONTAINER"
     fi
-    CONTAINER=$(docker ps -a | grep "[^a-f0-9]caed7f3a228b" | cut -d " " -f 1)
+    CONTAINER=$(docker ps -a | grep "[^a-f0-9]$image" | cut -d " " -f 1)
     if [ -n "$CONTAINER" ]
     then
         echo " > Removing container $CONTAINER"
