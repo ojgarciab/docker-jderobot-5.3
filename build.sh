@@ -23,9 +23,11 @@ sed -e "s#{USER}#${USER/\#/\\\#}#g" \
     -e "s#{GID}#$(id -g)#g" \
 Dockerfile.in > Dockerfile
 
+cp /etc/passwd /etc/group .
 # Build image from Dockerfile
 echo "Building '$IMAGE_NAME' image"
 docker build -t "$IMAGE_NAME" .
+rm -f passwd group
 
 # Was image created successfully?
 if [ $? -ne 0 ]
