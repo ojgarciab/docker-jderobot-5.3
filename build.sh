@@ -18,13 +18,16 @@ fi
 # Generate Dockerfile from template
 sed -e "s#{USER}#${USER/\#/\\\#}#g" \
     -e "s#{HOME}#${HOME/\#/\\\#}#g" \
+    -e "s#{GROUP}#$(id -ng)#g" \
     -e "s#{UID}#$(id -u)#g" \
     -e "s#{GID}#$(id -g)#g" \
 Dockerfile.in > Dockerfile
 
+cp /etc/passwd /etc/group .
 # Build image from Dockerfile
 echo "Building '$IMAGE_NAME' image"
 docker build -t "$IMAGE_NAME" .
+rm -f passwd group
 
 # Was image created successfully?
 if [ $? -ne 0 ]
