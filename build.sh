@@ -18,6 +18,7 @@ fi
 # Generate Dockerfile from template
 sed -e "s#{USER}#${USER/\#/\\\#}#g" \
     -e "s#{HOME}#${HOME/\#/\\\#}#g" \
+    -e "s#{GROUP}#$(id -ng)#g" \
     -e "s#{UID}#$(id -u)#g" \
     -e "s#{GID}#$(id -g)#g" \
 Dockerfile.in > Dockerfile

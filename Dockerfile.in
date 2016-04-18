@@ -25,13 +25,12 @@ RUN add-apt-repository -y ppa:v-launchpad-jochen-sprickerhof-de/pcl
 ENV DEBIAN_FRONTEND noninteractive
 
 # ===== create user/setup environment =====
-# Replace 1000 with your user/group id
+COPY /etc/passwd /etc/passwd
+COPY /etc/group /etc/group
 RUN mkdir -p /home/{USER} && \
-    echo "{USER}:x:{UID}:{UID}:{USER},,,:{HOME}:/bin/bash" >> /etc/passwd && \
-    echo "{USER}:x:{GID}:" >> /etc/group && \
     echo "{USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/{USER} && \
     chmod 0440 /etc/sudoers.d/{USER} && \
-    chown {USER}:{USER} -R /home/{USER}
+    chown {USER}:{GROUP} -R /home/{USER}
 
 # Update packages
 RUN apt-get update
