@@ -24,7 +24,8 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     gazebo5 \
     libgazebo5-dev \
     jderobot-deps-dev \
-    libqwt5-qt4-dev    
+    libqwt5-qt4-dev && \
+  apt-get clean
 
 # some QT-Apps/Gazebo don't not show controls without this
 ENV QT_X11_NO_MITSHM 1
