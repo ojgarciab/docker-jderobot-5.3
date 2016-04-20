@@ -5,7 +5,7 @@ MAINTAINER github/ojgarciab
 ENV DEBIAN_FRONTEND noninteractive
 
 # Add Gazebo, JdeRobot and PCL repositories
-RUN apt-get update && apt-get install -y software-properties-common && \
+RUN apt-get update && apt-get install -y curl software-properties-common && \
   add-apt-repository -y ppa:v-launchpad-jochen-sprickerhof-de/pcl && \
   echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -cs) main" \
     > /etc/apt/sources.list.d/gazebo-latest.list && \
