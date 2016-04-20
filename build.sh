@@ -15,19 +15,9 @@ else
     exit 1
 fi
 
-# Generate Dockerfile from template
-sed -e "s#{USER}#${USER/\#/\\\#}#g" \
-    -e "s#{HOME}#${HOME/\#/\\\#}#g" \
-    -e "s#{GROUP}#$(id -ng)#g" \
-    -e "s#{UID}#$(id -u)#g" \
-    -e "s#{GID}#$(id -g)#g" \
-Dockerfile.in > Dockerfile
-
-cp /etc/passwd /etc/group .
 # Build image from Dockerfile
 echo "Building '$IMAGE_NAME' image"
-docker build -t "$IMAGE_NAME" .
-rm -f passwd group
+time docker build -t "$IMAGE_NAME" .
 
 # Was image created successfully?
 if [ $? -ne 0 ]
@@ -36,5 +26,5 @@ then
     exit 1
 fi
   
-echo -e "Done!\nList available images with 'docker images'"
+echo -e "\nDone!\nList available images with 'docker images'"
 
